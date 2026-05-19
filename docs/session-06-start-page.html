@@ -971,7 +971,7 @@ commit = 기록으로 남기기
           continue;
         }
 
-        const unordered = line.match(/^- \s+(.*)$/);
+        const unordered = line.match(/^-\s+(.*)$/);
         if (unordered) {
           flushParagraph();
           if (listType !== "ul") {

@@ -881,7 +881,7 @@ LLM Wiki는 정리 결과가 `wiki/`에 남고, 다음 자료가 들어올 때 �
           continue;
         }
 
-        const unordered = line.match(/^- \s+(.*)$/);
+        const unordered = line.match(/^-\s+(.*)$/);
         if (unordered) {
           flushParagraph();
           if (listType !== "ul") {

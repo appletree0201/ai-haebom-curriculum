@@ -1058,7 +1058,7 @@ Codex에 요청했는데 날짜 형식의 `md` 파일이 보이지 않습니다.
           continue;
         }
 
-        const unordered = line.match(/^- \s+(.*)$/);
+        const unordered = line.match(/^-\s+(.*)$/);
         if (unordered) {
           flushParagraph();
           if (listType !== "ul") {

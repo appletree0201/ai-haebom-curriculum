@@ -1094,7 +1094,7 @@ Markdown으로 부서별 자동화 과제 카드를 작성합니다.
           continue;
         }
 
-        const unordered = line.match(/^- \s+(.*)$/);
+        const unordered = line.match(/^-\s+(.*)$/);
         if (unordered) {
           flushParagraph();
           if (listType !== "ul") {

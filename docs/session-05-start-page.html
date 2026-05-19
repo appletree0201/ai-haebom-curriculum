@@ -1016,7 +1016,7 @@ AI가 대신 판단하면 안 되는 부분을 적습니다.
           continue;
         }
 
-        const unordered = line.match(/^- \s+(.*)$/);
+        const unordered = line.match(/^-\s+(.*)$/);
         if (unordered) {
           flushParagraph();
           if (listType !== "ul") {

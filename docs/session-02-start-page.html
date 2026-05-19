@@ -1045,7 +1045,7 @@ profile-sketch-card 스킬을 사용해서 이 사진을 바탕으로 스케치 
           continue;
         }
 
-        const unordered = line.match(/^- \s+(.*)$/);
+        const unordered = line.match(/^-\s+(.*)$/);
         if (unordered) {
           flushParagraph();
           if (listType !== "ul") {
