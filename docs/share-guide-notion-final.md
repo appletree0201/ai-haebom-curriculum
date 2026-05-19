@@ -49,7 +49,7 @@ title: AI 해봄 컬리큘럼
 | 6회차  | Windows Git 설치와 기본 기록 | 변경 기록 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-06-start-page.html) |         |
 | 7회차  |  Obsidian과 LLM Wiki   | 지식 축적 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-07-start-page.html) |         |
 | 8회차  |  진행 상황 공유와 지원·협업 연결   | 협업 연결 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-08-start-page.html) |         |
-| 9회차  |     최신 AI 트렌드 공유      | 직전 선정 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-09-start-page.html) |         |
+| 9회차  |     최신 AI 트렌드 공유      | 미정 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-09-start-page.html) |         |
 | 10회차 |     업무자동화 시작점 공유회     | 확장 시작 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-10-start-page.html) |         |
 
 > 9회차는 회차 직전에 가장 화제가 되는 AI 주제를 정합니다.
