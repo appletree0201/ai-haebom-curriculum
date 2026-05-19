@@ -1,5 +1,5 @@
 ---
-title: 7회차 시연자료 초안
+title: 7회차 시연내용 초안
 type: draft
 session: 07
 topic: Obsidian과 LLM Wiki 회의자료 시연
@@ -8,7 +8,7 @@ duration: 1h
 share: notion
 ---
 
-# 7회차 시연자료
+# 7회차 시연내용
 
 ## 시연 목적
 - Obsidian이 무엇을 보는 도구인지 보여 준다.

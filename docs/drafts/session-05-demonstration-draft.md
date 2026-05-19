@@ -1,5 +1,5 @@
 ---
-title: 5회차 시연자료 초안
+title: 5회차 시연내용 초안
 type: draft
 session: 05
 topic: 부서별 자동화 과제 카드 작성
@@ -8,7 +8,7 @@ duration: 1h
 share: notion
 ---
 
-# 5회차 시연자료
+# 5회차 시연내용
 
 ## 시연 목적
 - Markdown을 VS Code에서 어디에 작성하는지 보여 준다.

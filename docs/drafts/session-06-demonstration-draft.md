@@ -1,5 +1,5 @@
 ---
-title: 6회차 시연자료 초안
+title: 6회차 시연내용 초안
 type: draft
 session: 06
 topic: Windows Git 설치와 기본 기록 남기기
@@ -8,7 +8,7 @@ duration: 1h
 share: notion
 ---
 
-# 6회차 시연자료
+# 6회차 시연내용
 
 ## 시연 목적
 - Git이 설치되지 않은 Windows PC를 기준으로 시작한다.

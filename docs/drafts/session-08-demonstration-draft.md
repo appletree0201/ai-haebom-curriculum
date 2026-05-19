@@ -1,5 +1,5 @@
 ---
-title: 8회차 시연자료 초안
+title: 8회차 운영자료 초안
 type: draft
 session: 08
 topic: 업무자동화 진행 상황 공유와 지원·협업 연결

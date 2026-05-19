@@ -1,5 +1,5 @@
 ---
-title: 2회차 시연자료 초안
+title: 2회차 시연내용 초안
 type: draft
 session: 02
 topic: Codex의 작업 규칙과 skills 이해하기
@@ -8,7 +8,7 @@ duration: 1h
 share: notion
 ---
 
-# 2회차 시연자료
+# 2회차 시연내용
 
 ## 시연 목적
 2회차 시연의 목적은 `AGENTS.md`가 자동으로 생기는 문서가 아니라는 점을 보여주고, 사람이 직접 만들고 수정하는 흐름을 눈으로 따라가게 하는 것입니다.
