@@ -533,7 +533,7 @@
 
     <section class="section" aria-labelledby="homework-title">
       <div class="section-header">
-        <h2 id="homework-title">집에서 할 일</h2>
+        <h2 id="homework-title">각자 해보기</h2>
         <p class="section-desc">업무 폴더가 아니라 새 연습 폴더에서 오늘 명령어를 다시 실행합니다.</p>
       </div>
 
@@ -558,7 +558,7 @@
 title: 6회차 설명자료 최종본
 type: final
 session: 06
-topic: Windows Git 설치와 기본 기록 남기기
+topic: Windows Git 설치와 기본 기록
 audience: complete-beginners
 duration: 1h
 share: notion
@@ -566,147 +566,81 @@ share: notion
 
 # 6회차
 
-## 오늘의 주제
-오늘은 Windows PC에 Git을 설치하고, VS Code 터미널에서 기본 기록 남기기를 연습합니다.
-
-5회차 자동화 과제 카드와 직접 연결하지 않습니다.
-
-오늘은 별도 실습 파일인 `git-practice.md`로 Git의 기본 흐름만 익힙니다.
-
 ## 오늘의 목표
-- Git이 무엇인지 아주 쉽게 이해한다.
-- Windows에서 Git을 설치한다.
-- VS Code 터미널에서 Git 설치 여부를 확인한다.
-- `git-practice.md` 파일을 만든다.
-- `git init`, `git status`, `git add`, `git commit`을 실행해 본다.
-- 스테이징과 커밋의 차이를 이해한다.
+- Git이 변경 기록을 남기는 도구라는 점을 이해한다.
+- Windows에서 Git 설치 흐름을 안다.
+- `init`, `status`, `add`, `commit`의 역할을 구분한다.
+- 작은 파일 하나를 기록으로 남기는 흐름을 이해한다.
 
-## 오늘 다루지 않는 것
-- GitHub
-- branch
-- merge
-- conflict
-- push
-- pull
-- 여러 사람이 함께 작업하는 협업 흐름
+## 먼저 알아둘 말
+오늘은 GitHub를 배우는 날이 아닙니다.
 
-## Git은 무엇인가
-```text
-Git = 내 작업 폴더의 변경 기록 노트
-```
+오늘은 내 컴퓨터 안에서 변경 기록을 남기는 기본 흐름만 봅니다.
 
-Git을 쓰면 무엇을 바꿨는지 볼 수 있고, 작업 단계를 기록으로 남길 수 있습니다.
+브랜치, 머지, 충돌, 푸시, 풀은 다루지 않습니다.
 
-## 오늘 사용할 비유
-```text
-git init = 이 폴더를 기록하기 시작
-git status = 지금 뭐가 바뀌었는지 확인
-git add = 이번 기록에 넣을 파일 고르기
-git commit = 고른 파일들을 하나의 저장 기록으로 남기기
-```
+## 왜 Git을 배우는가
+자동화 자료와 코드는 계속 바뀝니다.
 
-## 스테이징이란
-```text
-스테이징 = 이번 저장 기록에 넣을 파일을 올려두는 대기 공간
-```
+무엇을 언제 바꿨는지 기록하지 않으면 나중에 되돌아보기 어렵습니다.
 
-`git add`는 이번 기록에 넣을 파일을 고르는 작업입니다.
+Git은 파일 변경을 단계별로 기록하는 도구입니다.
 
-## Windows에서 Git 설치하기
-1. 웹 브라우저를 연다.
-2. Git 공식 설치 페이지에 접속한다.
-3. Windows용 Git 설치 파일을 다운로드한다.
-4. 다운로드한 설치 파일을 실행한다.
-5. 특별한 이유가 없으면 기본값으로 `Next`를 눌러 진행한다.
-6. 설치가 끝나면 VS Code를 완전히 닫았다가 다시 연다.
+초보자는 처음에 네 가지 명령만 기억하면 됩니다.
 
-Git 공식 설치 페이지:
-
-```text
-https://git-scm.com/install/windows.html
-```
-
-## 설치 확인하기
-VS Code에서 터미널을 엽니다.
-
-```text
-Terminal > New Terminal
-```
-
-터미널에서 아래 명령어를 입력합니다.
-
-```text
-git --version
-```
-
-정상이라면 `git version 2.xx.x`처럼 보입니다.
-
-## 실습 파일 만들기
-연습 폴더에서 `git-practice.md` 파일을 만듭니다.
-
-```md
-# Git 연습
-
-오늘 Git 설치와 기본 명령어를 배웠습니다.
-```
-
-## git init
 ```text
 git init
-```
-
-이 폴더를 Git 기록 대상으로 만들겠다는 뜻입니다.
-
-## git status
-```text
 git status
+git add
+git commit
 ```
 
-현재 무엇이 바뀌었는지 확인합니다.
+## 핵심 개념
+### 저장소
+Git이 변경 기록을 관리하는 폴더입니다.
 
-## git add
-```text
-git add git-practice.md
-```
+### 상태 확인
+`git status`는 지금 어떤 파일이 바뀌었는지 보여줍니다.
 
-이번 기록에 넣을 파일을 고릅니다.
+### 스테이징
+`git add`는 이번 기록에 포함할 파일을 고르는 단계입니다.
 
-## git commit
-```text
-git commit -m "첫 Git 연습 기록"
-```
+### 커밋
+`git commit`은 선택한 변경사항을 하나의 기록으로 남기는 단계입니다.
 
-스테이징한 파일을 하나의 기록으로 남깁니다.
+## 기본 흐름
+1. 실습 폴더를 엽니다.
+2. Git 저장소로 초기화합니다.
+3. 파일을 하나 만듭니다.
+4. 상태를 확인합니다.
+5. 기록할 파일을 선택합니다.
+6. 커밋 메시지와 함께 기록합니다.
 
-## 오늘의 전체 흐름
-```text
-Git 설치
--> git --version
--> git-practice.md 만들기
--> git init
--> git status
--> git add git-practice.md
--> git status
--> git commit -m "첫 Git 연습 기록"
--> git status
-```
+## 함께 확인할 포인트
+- Git은 백업 도구가 아니라 변경 기록 도구입니다.
+- `status`를 자주 확인하면 현재 상태를 이해하기 쉽습니다.
+- `add`는 기록할 대상을 고르는 단계입니다.
+- `commit`은 기록을 남기는 단계입니다.
+- 처음에는 명령어를 많이 외우지 않아도 됩니다.
 
-## 자주 막히는 지점
-### git 명령어를 찾을 수 없다고 나오는 경우
-Git 설치 후 VS Code를 다시 열었는지 확인합니다.
+## 각자 해보기
+- Windows에 Git이 설치되어 있는지 확인합니다.
+- VS Code에서 실습 폴더를 엽니다.
+- 터미널을 열고 `git init`을 실행합니다.
+- `git-practice.md` 파일을 만듭니다.
+- `git status`로 상태를 확인합니다.
+- `git add git-practice.md`를 실행합니다.
+- `git commit -m "첫 Git 연습 기록"`으로 기록을 남깁니다.
 
-### commit에서 이름과 이메일을 요구하는 경우
-아래 설정이 필요할 수 있습니다.
+## 다음 회차 예고
+다음 회차에서는 Obsidian과 LLM Wiki를 소개합니다.
 
-```text
-git config --global user.name "내 이름"
-git config --global user.email "내 이메일"
-```
+자료를 그냥 보관하는 것이 아니라, AI가 정리한 위키로 쌓아 가는 방식을 봅니다.
 
 ## 마무리
-오늘은 GitHub나 협업을 다루지 않습니다.
+6회차의 핵심은 Git을 어렵게 쓰는 것이 아닙니다.
 
-내 PC 안에서 내 파일의 변경 기록을 남기는 것부터 시작합니다.
+작은 변경을 기록으로 남기는 감각을 익히는 것입니다.
   </script>
 
   <script type="text/plain" id="md-demo">
@@ -714,7 +648,7 @@ git config --global user.email "내 이메일"
 title: 6회차 시연내용 초안
 type: draft
 session: 06
-topic: Windows Git 설치와 기본 기록 남기기
+topic: Windows Git 설치와 기본 기록
 audience: complete-beginners
 duration: 1h
 share: notion
@@ -723,105 +657,80 @@ share: notion
 # 6회차 시연내용
 
 ## 시연 목적
-- Git이 설치되지 않은 Windows PC를 기준으로 시작한다.
-- Git 설치, 설치 확인, VS Code 터미널 실행 흐름을 보여 준다.
-- `git-practice.md` 파일로 Git 기본 명령어를 실습한다.
-- `init`, `status`, `add`, `commit`의 의미를 초보자 기준으로 설명한다.
-- 스테이징과 커밋의 차이를 보여 준다.
+6회차 시연은 Git을 설치하지 않은 상태에서 시작해, 작은 파일 하나를 변경 기록으로 남기는 흐름을 보여줍니다.
 
-## 오늘 보여줄 핵심
-```text
-Git 설치
--> 설치 확인
--> 실습 파일 만들기
--> 폴더 기록 시작
--> 변경 상태 확인
--> 스테이징
--> 커밋
-```
+목적은 Git 전체를 배우는 것이 아니라 `init`, `status`, `add`, `commit`의 흐름을 눈으로 확인하는 것입니다.
 
-## 오늘 제외할 내용
-```text
-오늘은 GitHub, branch, merge, conflict, push, pull을 다루지 않습니다.
-오늘은 내 PC에서 내 파일의 변경 기록을 남기는 것까지만 합니다.
-```
+## 준비 상태
+- Windows PC를 기준으로 진행합니다.
+- Git 설치 여부를 확인할 수 있습니다.
+- VS Code와 터미널을 열 수 있습니다.
+- 실습 폴더가 준비되어 있습니다.
 
-## 1. Git 설치 페이지 보여주기
-```text
-https://git-scm.com/install/windows.html
-```
+## 진행 흐름
+1. Git 설치 여부를 확인합니다.
+2. 설치되어 있지 않다면 설치 흐름을 보여줍니다.
+3. VS Code에서 실습 폴더를 엽니다.
+4. 터미널을 엽니다.
+5. `git init`을 실행합니다.
+6. `git-practice.md` 파일을 만듭니다.
+7. `git status`로 상태를 확인합니다.
+8. `git add`로 기록할 파일을 선택합니다.
+9. `git commit`으로 기록을 남깁니다.
 
-Windows용 설치 파일을 다운로드하는 위치를 보여 줍니다.
-
-## 2. VS Code 다시 열기
-Git 설치 후에는 VS Code를 완전히 닫았다가 다시 엽니다.
-
-## 3. VS Code 터미널 열기
-```text
-Terminal > New Terminal
-```
-
-## 4. 설치 확인하기
+## 화면에서 보여줄 것
+### 1. 설치 확인
 ```text
 git --version
 ```
 
-정상 예시입니다.
+확인할 점은 Git 버전이 보이는지입니다.
 
-```text
-git version 2.xx.x
-```
-
-## 5. 실습 폴더 열기
-```text
-File > Open Folder
-```
-
-예시 폴더 이름입니다.
-
-```text
-git-practice
-```
-
-## 6. git-practice.md 만들기
-```md
-# Git 연습
-
-오늘 Git 설치와 기본 명령어를 배웠습니다.
-```
-
-## 7. git init 실행
+### 2. 저장소 시작
 ```text
 git init
 ```
 
-## 8. git status 실행
+확인할 점은 현재 폴더가 Git 기록을 남길 준비가 되었는지입니다.
+
+### 3. 상태 확인
 ```text
 git status
 ```
 
-## 9. git add 실행
+확인할 점은 새 파일이나 변경된 파일이 보이는지입니다.
+
+### 4. 기록할 파일 선택
 ```text
 git add git-practice.md
 ```
 
-## 10. 스테이징 상태 확인
-```text
-git status
-```
+확인할 점은 이번 기록에 포함할 파일을 선택한다는 점입니다.
 
-## 11. git commit 실행
+### 5. 기록 남기기
 ```text
 git commit -m "첫 Git 연습 기록"
 ```
 
-## 12. 깨끗한 상태 확인
-```text
-git status
-```
+확인할 점은 커밋이 하나 만들어졌는지입니다.
 
-## 마무리
-내 PC에서 내 파일의 변경 기록을 남기는 것부터 시작합니다.
+## 결과 확인 기준
+- `git --version`으로 설치 여부를 확인했는지 봅니다.
+- `git status` 결과가 단계마다 달라지는지 봅니다.
+- `git add` 후 상태가 바뀌는지 봅니다.
+- `git commit` 후 작업할 내용이 없다는 메시지에 가까워지는지 봅니다.
+
+## 함께 확인할 포인트
+- `status`는 자주 확인하는 명령입니다.
+- `add`는 저장이 아니라 기록할 대상을 고르는 일입니다.
+- `commit`은 기록을 남기는 일입니다.
+- 오늘은 GitHub에 올리지 않습니다.
+- 오류 메시지가 나오면 그대로 읽고 기록합니다.
+
+## 마무리 질문
+- `git status`는 언제 쓰나요?
+- `git add`와 `git commit`은 무엇이 다른가요?
+- 기록을 남기면 나중에 무엇이 좋아질까요?
   </script>
 
   <script type="text/plain" id="md-guide">
