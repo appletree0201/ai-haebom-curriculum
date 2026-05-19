@@ -2,7 +2,7 @@
 title: AI 해봄 컬리큘럼
 ---
 
-# AI 해봄 학습자료 공유 안내
+# AI 해봄 학습자료 안내
 
 > **이 페이지의 역할**
 >
@@ -13,12 +13,12 @@ title: AI 해봄 컬리큘럼
 
 ## 먼저 이렇게 보면 됩니다
 
-| 순서 | 볼 자료 | 역할 |
-|---:|---|---|
-| 1 | Notion 안내 페이지 | 전체 흐름과 회차별 링크 확인 |
-| 2 | HTML 시작 페이지 | 실제 학습 화면 |
-| 3 | 설명자료와 시연자료 | 개념 확인과 따라 하기 |
-| 4 | Markdown 원문 | 필요할 때만 참고 |
+| 순서  |     볼 자료      |        역할        |
+| :-: | :-----------: | :--------------: |
+|  1  | Notion 안내 페이지 | 전체 흐름과 회차별 링크 확인 |
+|  2  |  HTML 시작 페이지  |     실제 학습 화면     |
+|  3  |  설명자료와 시연자료   |   개념 확인과 따라 하기   |
+|  4  |  Markdown 원문  |    필요할 때만 참고     |
 
 > **권장 흐름**
 >
@@ -27,7 +27,7 @@ title: AI 해봄 컬리큘럼
 
 ---
 
-## 전체 자료 바로가기
+## 전체 자료
 
 아래 링크는 전체 회차 자료를 한 화면에서 볼 수 있는 시작 페이지입니다.
 
@@ -39,43 +39,21 @@ title: AI 해봄 컬리큘럼
 
 ## 1~10회차 세부 커리큘럼
 
-| 회차 | 주제 | 상태 | 자료 |
-|---:|---|---|---|
-| 1회차 | VS Code와 Codex 시작 | 기본 준비 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-01-start-page.html) |
-| 2회차 | AGENTS.md와 skills 이해 | 작업 규칙 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-02-start-page.html) |
-| 3회차 | 큰 요청을 작은 계획으로 나누기 | 계획 수립 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-03-start-page.html) |
-| 4회차 | 실제 업무자동화 사례 보기 | 사례 공유 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-04-start-page.html) |
-| 5회차 | 자동화 과제 정의와 Markdown | 과제 정의 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-05-start-page.html) |
-| 6회차 | Windows Git 설치와 기본 기록 | 변경 기록 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-06-start-page.html) |
-| 7회차 | Obsidian과 LLM Wiki | 지식 축적 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-07-start-page.html) |
-| 8회차 | 진행 상황 공유와 지원·협업 연결 | 협업 연결 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-08-start-page.html) |
-| 9회차 | 최신 AI 트렌드 공유 | 직전 선정 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-09-start-page.html) |
-| 10회차 | 업무자동화 시작점 공유회 | 확장 시작 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-10-start-page.html) |
+|  회차  |          주제           |  상태   |                                              자료                                              | 일시 및 장소 |
+| :--: | :-------------------: | :---: | :------------------------------------------------------------------------------------------: | :-----: |
+| 1회차  |   VS Code와 Codex 시작   | 기본 준비 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-01-start-page.html) |         |
+| 2회차  | AGENTS.md와 skills 이해  | 작업 규칙 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-02-start-page.html) |         |
+| 3회차  |   큰 요청을 작은 계획으로 나누기   | 계획 수립 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-03-start-page.html) |         |
+| 4회차  |    실제 업무자동화 사례 보기     | 사례 공유 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-04-start-page.html) |         |
+| 5회차  |  자동화 과제 정의와 Markdown  | 과제 정의 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-05-start-page.html) |         |
+| 6회차  | Windows Git 설치와 기본 기록 | 변경 기록 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-06-start-page.html) |         |
+| 7회차  |  Obsidian과 LLM Wiki   | 지식 축적 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-07-start-page.html) |         |
+| 8회차  |  진행 상황 공유와 지원·협업 연결   | 협업 연결 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-08-start-page.html) |         |
+| 9회차  |     최신 AI 트렌드 공유      | 직전 선정 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-09-start-page.html) |         |
+| 10회차 |     업무자동화 시작점 공유회     | 확장 시작 | [HTML 상세보기](https://appletree0201.github.io/ai-haebom-curriculum/session-10-start-page.html) |         |
 
 > 9회차는 회차 직전에 가장 화제가 되는 AI 주제를 정합니다.
 > 10회차는 끝이 아니라 각자의 업무자동화가 실제 업무 안에서 자라나는 시작점입니다.
-
----
-
-## 처음 참여하는 사람은 여기부터
-
-1회차는 환경 세팅이 중심입니다.
-VS Code 설치, 한글 설정, 확장 프로그램 설치, Codex 연결, 권한 확인을 다룹니다.
-
-| 자료 | 언제 보면 좋은가 | 링크 |
-|---|---|---|
-| 1회차 HTML 시작 페이지 | 전체 흐름을 처음 볼 때 | [열기](https://appletree0201.github.io/ai-haebom-curriculum/session-01-start-page.html) |
-| 설치 체크리스트 | 집에서 설치를 따라 할 때 | [열기](https://appletree0201.github.io/ai-haebom-curriculum/session-01-install-checklist-notion-final.md) |
-| 문제 해결 FAQ | 설치나 연결에서 막혔을 때 | [열기](https://appletree0201.github.io/ai-haebom-curriculum/session-01-troubleshooting-faq-notion-final.md) |
-
----
-
-## 커리큘럼 전체 흐름
-
-전체 흐름을 문서로 보고 싶을 때 사용합니다.
-
-- [1~6회 전체 커리큘럼](https://appletree0201.github.io/ai-haebom-curriculum/6-session-curriculum-notion-final.md)
-- [7~10회 확장 커리큘럼](https://appletree0201.github.io/ai-haebom-curriculum/extended-curriculum-session-07-10-notion-final.md)
 
 ---
 
@@ -139,19 +117,3 @@ VS Code 설치, 한글 설정, 확장 프로그램 설치, Codex 연결, 권한 
 - 원본 자료는 수정하지 않고 별도 폴더에 보관합니다.
 
 ---
-
-## Notion에서 예쁘게 보이게 하는 방법
-
-이 Markdown을 Notion에 붙여 넣은 뒤, 아래처럼 블록 색상을 적용하면 보기 좋습니다.
-
-| 영역 | 추천 Notion 스타일 |
-|---|---|
-| 맨 위 안내 인용문 | 초록 배경 또는 파란 배경 |
-| `먼저 이렇게 보면 됩니다` 표 | 기본 표 유지 |
-| `전체 자료 바로가기` 링크 | 버튼처럼 보이도록 굵게 표시 |
-| 회차별 커리큘럼 표 | 표 너비 넓게 보기 |
-| `막혔을 때 질문하는 방법` | 파란 배경 |
-| `자료 사용 시 주의사항` | 노란 배경 또는 빨간 배경 |
-
-Notion에서는 Markdown만으로 색상이 완전히 고정되지 않습니다.
-붙여 넣은 뒤 중요한 안내 블록에만 색상을 적용하면 충분합니다.
