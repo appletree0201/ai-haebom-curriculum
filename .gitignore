@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+*.log
+*.tmp
+*.temp
+
+raw/
+wiki/
+Output/
+.obsidian/
+.vscode/
+.env
+.env.*

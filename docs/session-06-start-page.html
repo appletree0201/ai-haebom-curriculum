@@ -1,0 +1,1037 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 해봄 동호회 6회차 시작 페이지</title>
+  <style>
+    :root {
+      --bg: #f3efe5;
+      --ink: #17211f;
+      --muted: #65706c;
+      --line: #d8d0c0;
+      --panel: #fffaf0;
+      --green: #1f6b57;
+      --green-deep: #143f35;
+      --amber: #c47a22;
+      --blue: #2f5e7d;
+      --grid: rgba(47, 94, 125, 0.13);
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(23, 33, 31, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        radial-gradient(circle at 12% 8%, rgba(31, 107, 87, 0.17), transparent 32%),
+        radial-gradient(circle at 95% 20%, rgba(196, 122, 34, 0.18), transparent 30%),
+        var(--bg);
+      background-size: 44px 44px, 44px 44px, auto, auto, auto;
+      font-family: "Pretendard", "Noto Sans KR", "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-main {
+      min-height: 360px;
+      padding: 44px;
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 240, 0.92);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -110px;
+      width: 290px;
+      height: 290px;
+      border: 34px solid rgba(196, 122, 34, 0.12);
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: #3d4744;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-side {
+      min-height: 360px;
+      padding: 28px;
+      background: var(--green-deep);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-side h2 {
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .status-list li {
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+    }
+
+    .note {
+      margin: 24px 0 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.66);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    .section-desc {
+      max-width: 640px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .resource {
+      min-height: 230px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .resource:hover {
+      transform: translateY(-3px);
+      border-color: rgba(31, 107, 87, 0.55);
+      box-shadow: 0 14px 34px rgba(23, 33, 31, 0.11);
+    }
+
+    .resource-number {
+      color: var(--amber);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .resource h3 {
+      margin: 14px 0 8px;
+      font-size: 23px;
+      line-height: 1.25;
+    }
+
+    .resource p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .resource-link {
+      margin-top: 22px;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .resource.is-active {
+      border-color: var(--green);
+      box-shadow: 0 16px 38px rgba(31, 107, 87, 0.16);
+    }
+
+    .viewer {
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      background: #fffdf8;
+    }
+
+    .viewer-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      background: #f7efe2;
+    }
+
+    .viewer-toolbar strong {
+      font-size: 18px;
+    }
+
+    .viewer-toolbar a {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .rendered-doc {
+      max-height: 700px;
+      overflow: auto;
+      padding: 34px;
+    }
+
+    .rendered-doc h1,
+    .rendered-doc h2,
+    .rendered-doc h3,
+    .rendered-doc h4 {
+      margin: 28px 0 10px;
+      line-height: 1.3;
+    }
+
+    .rendered-doc h1:first-child,
+    .rendered-doc h2:first-child {
+      margin-top: 0;
+    }
+
+    .rendered-doc h1 {
+      font-size: 34px;
+    }
+
+    .rendered-doc h2 {
+      padding-top: 8px;
+      border-top: 1px solid #ece2d5;
+      font-size: 25px;
+    }
+
+    .rendered-doc h3 {
+      font-size: 20px;
+    }
+
+    .rendered-doc p {
+      margin: 10px 0;
+      color: #394440;
+    }
+
+    .rendered-doc ul,
+    .rendered-doc ol {
+      margin: 10px 0 18px;
+      padding-left: 24px;
+    }
+
+    .rendered-doc li {
+      margin: 6px 0;
+    }
+
+    .rendered-doc code {
+      padding: 2px 6px;
+      border: 1px solid #ddd1c3;
+      background: #f5efe7;
+      color: #123f34;
+      font-family: "D2Coding", Consolas, monospace;
+      font-size: 0.94em;
+    }
+
+    .rendered-doc pre {
+      overflow: auto;
+      margin: 16px 0;
+      padding: 16px;
+      border: 1px solid #d5cabc;
+      background: #17211f;
+      color: #f8f2e8;
+    }
+
+    .rendered-doc pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      counter-reset: step;
+    }
+
+    .step {
+      min-height: 160px;
+      padding: 20px;
+      border-top: 5px solid var(--green);
+      background: var(--white);
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      margin-bottom: 18px;
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .step span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .checklist li {
+      padding: 14px 16px;
+      border-left: 4px solid var(--amber);
+      background: var(--white);
+      color: #333d39;
+      font-size: 15px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 24px 30px;
+      color: var(--white);
+      background: #1d2d35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    .footer strong {
+      color: #f4c77d;
+    }
+
+    @media (max-width: 980px) {
+      .timeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(100% - 24px, 1120px);
+        padding: 24px 0 36px;
+      }
+
+      .hero,
+      .resource-grid,
+      .timeline,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-side,
+      .section {
+        padding: 24px;
+      }
+
+      .section-header,
+      .footer {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-main">
+        <p class="eyebrow">AI 해봄 동호회 · 6회차</p>
+        <h1 id="page-title">Windows Git 설치와 기본 기록 남기기</h1>
+        <p class="lead">
+          Git이 설치되지 않은 Windows PC를 기준으로 시작합니다. VS Code 터미널에서
+          `git-practice.md` 파일을 만들고, `init`, `status`, `add`, `commit` 흐름을 연습합니다.
+        </p>
+      </div>
+
+      <aside class="hero-side" aria-label="6회차 완료 기준">
+        <div>
+          <h2>오늘의 완료 기준</h2>
+          <ul class="status-list">
+            <li>Windows에서 Git 설치 위치 확인</li>
+            <li>VS Code 터미널에서 `git --version` 확인</li>
+            <li>`git-practice.md` 실습 파일 생성</li>
+            <li>`init`, `status`, `add`, `commit` 실행 흐름 이해</li>
+            <li>스테이징과 커밋의 차이 이해</li>
+          </ul>
+        </div>
+        <p class="note">GitHub, branch, merge, conflict, push, pull은 오늘 다루지 않습니다.</p>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="resources-title">
+      <div class="section-header">
+        <h2 id="resources-title">자료를 보는 순서</h2>
+        <p class="section-desc">
+          설명자료로 개념을 잡고, 시연자료로 설치와 터미널 흐름을 본 뒤,
+          명령어 요약으로 집에서 다시 연습합니다.
+        </p>
+      </div>
+
+      <div class="resource-grid">
+        <a class="resource" href="session-06-notion-final.md" data-doc="explanation">
+          <div>
+            <span class="resource-number">01</span>
+            <h3>6회차 설명자료</h3>
+            <p>Git 설치, 스테이징, 커밋, 기본 명령어 흐름을 초보자 기준으로 설명합니다.</p>
+          </div>
+          <span class="resource-link">설명자료 열기</span>
+        </a>
+
+        <a class="resource" href="drafts/session-06-demonstration-draft.md" data-doc="demo">
+          <div>
+            <span class="resource-number">02</span>
+            <h3>6회차 시연자료</h3>
+            <p>Windows Git 설치부터 `git-practice.md` 커밋까지 화면에서 보여주는 순서입니다.</p>
+          </div>
+          <span class="resource-link">시연자료 열기</span>
+        </a>
+
+        <a class="resource" href="#" data-doc="guide">
+          <div>
+            <span class="resource-number">03</span>
+            <h3>Git 명령어 요약</h3>
+            <p>오늘 쓰는 명령어와 의미만 따로 모았습니다.</p>
+          </div>
+          <span class="resource-link">요약 가이드 보기</span>
+        </a>
+      </div>
+
+      <section class="viewer" id="document-viewer" aria-live="polite">
+        <div class="viewer-toolbar">
+          <strong id="viewer-title">6회차 설명자료</strong>
+          <a id="viewer-source" href="session-06-notion-final.md">원본 md 열기</a>
+        </div>
+        <article class="rendered-doc" id="viewer-content"></article>
+      </section>
+    </section>
+
+    <section class="section" aria-labelledby="flow-title">
+      <div class="section-header">
+        <h2 id="flow-title">6회차 현장 흐름</h2>
+        <p class="section-desc">설치 확인부터 커밋까지 한 번에 많이 하지 않고, 상태를 계속 확인하면서 진행합니다.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <strong>Git 설치</strong>
+          <span>Windows Git 설치 페이지에서 설치 파일을 받고 기본값으로 설치합니다.</span>
+        </div>
+        <div class="step">
+          <strong>설치 확인</strong>
+          <span>VS Code를 다시 열고 터미널에서 `git --version`을 확인합니다.</span>
+        </div>
+        <div class="step">
+          <strong>파일 만들기</strong>
+          <span>연습 폴더에서 `git-practice.md` 파일을 만들고 저장합니다.</span>
+        </div>
+        <div class="step">
+          <strong>기록 준비</strong>
+          <span>`git init`, `git status`, `git add`로 기록할 파일을 준비합니다.</span>
+        </div>
+        <div class="step">
+          <strong>커밋</strong>
+          <span>`git commit`으로 하나의 작업 기록을 남기고 다시 상태를 확인합니다.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="homework-title">
+      <div class="section-header">
+        <h2 id="homework-title">집에서 할 일</h2>
+        <p class="section-desc">업무 폴더가 아니라 새 연습 폴더에서 오늘 명령어를 다시 실행합니다.</p>
+      </div>
+
+      <ul class="checklist">
+        <li>`git --version`으로 설치 여부를 확인합니다.</li>
+        <li>새 연습 폴더를 하나 만듭니다.</li>
+        <li>`git-practice.md` 파일을 만들고 저장합니다.</li>
+        <li>`git init`, `git status`, `git add`, `git commit`을 다시 실행합니다.</li>
+        <li>`git status`를 여러 번 실행해 상태 변화를 봅니다.</li>
+        <li>스테이징과 커밋의 차이를 한 문장으로 정리합니다.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p><strong>6회차 목표</strong> Git을 작업 기록 안전장치로 이해하고 로컬 커밋까지 경험하기</p>
+      <p>AI 해봄 동호회</p>
+    </footer>
+  </main>
+
+  <script type="text/plain" id="md-explanation">
+---
+title: 6회차 설명자료 최종본
+type: final
+session: 06
+topic: Windows Git 설치와 기본 기록 남기기
+audience: complete-beginners
+duration: 1h
+share: notion
+---
+
+# 6회차
+
+## 오늘의 주제
+오늘은 Windows PC에 Git을 설치하고, VS Code 터미널에서 기본 기록 남기기를 연습합니다.
+
+5회차 자동화 과제 카드와 직접 연결하지 않습니다.
+
+오늘은 별도 실습 파일인 `git-practice.md`로 Git의 기본 흐름만 익힙니다.
+
+## 오늘의 목표
+- Git이 무엇인지 아주 쉽게 이해한다.
+- Windows에서 Git을 설치한다.
+- VS Code 터미널에서 Git 설치 여부를 확인한다.
+- `git-practice.md` 파일을 만든다.
+- `git init`, `git status`, `git add`, `git commit`을 실행해 본다.
+- 스테이징과 커밋의 차이를 이해한다.
+
+## 오늘 다루지 않는 것
+- GitHub
+- branch
+- merge
+- conflict
+- push
+- pull
+- 여러 사람이 함께 작업하는 협업 흐름
+
+## Git은 무엇인가
+```text
+Git = 내 작업 폴더의 변경 기록 노트
+```
+
+Git을 쓰면 무엇을 바꿨는지 볼 수 있고, 작업 단계를 기록으로 남길 수 있습니다.
+
+## 오늘 사용할 비유
+```text
+git init = 이 폴더를 기록하기 시작
+git status = 지금 뭐가 바뀌었는지 확인
+git add = 이번 기록에 넣을 파일 고르기
+git commit = 고른 파일들을 하나의 저장 기록으로 남기기
+```
+
+## 스테이징이란
+```text
+스테이징 = 이번 저장 기록에 넣을 파일을 올려두는 대기 공간
+```
+
+`git add`는 이번 기록에 넣을 파일을 고르는 작업입니다.
+
+## Windows에서 Git 설치하기
+1. 웹 브라우저를 연다.
+2. Git 공식 설치 페이지에 접속한다.
+3. Windows용 Git 설치 파일을 다운로드한다.
+4. 다운로드한 설치 파일을 실행한다.
+5. 특별한 이유가 없으면 기본값으로 `Next`를 눌러 진행한다.
+6. 설치가 끝나면 VS Code를 완전히 닫았다가 다시 연다.
+
+Git 공식 설치 페이지:
+
+```text
+https://git-scm.com/install/windows.html
+```
+
+## 설치 확인하기
+VS Code에서 터미널을 엽니다.
+
+```text
+Terminal > New Terminal
+```
+
+터미널에서 아래 명령어를 입력합니다.
+
+```text
+git --version
+```
+
+정상이라면 `git version 2.xx.x`처럼 보입니다.
+
+## 실습 파일 만들기
+연습 폴더에서 `git-practice.md` 파일을 만듭니다.
+
+```md
+# Git 연습
+
+오늘 Git 설치와 기본 명령어를 배웠습니다.
+```
+
+## git init
+```text
+git init
+```
+
+이 폴더를 Git 기록 대상으로 만들겠다는 뜻입니다.
+
+## git status
+```text
+git status
+```
+
+현재 무엇이 바뀌었는지 확인합니다.
+
+## git add
+```text
+git add git-practice.md
+```
+
+이번 기록에 넣을 파일을 고릅니다.
+
+## git commit
+```text
+git commit -m "첫 Git 연습 기록"
+```
+
+스테이징한 파일을 하나의 기록으로 남깁니다.
+
+## 오늘의 전체 흐름
+```text
+Git 설치
+-> git --version
+-> git-practice.md 만들기
+-> git init
+-> git status
+-> git add git-practice.md
+-> git status
+-> git commit -m "첫 Git 연습 기록"
+-> git status
+```
+
+## 자주 막히는 지점
+### git 명령어를 찾을 수 없다고 나오는 경우
+Git 설치 후 VS Code를 다시 열었는지 확인합니다.
+
+### commit에서 이름과 이메일을 요구하는 경우
+아래 설정이 필요할 수 있습니다.
+
+```text
+git config --global user.name "내 이름"
+git config --global user.email "내 이메일"
+```
+
+## 마무리
+오늘은 GitHub나 협업을 다루지 않습니다.
+
+내 PC 안에서 내 파일의 변경 기록을 남기는 것부터 시작합니다.
+  </script>
+
+  <script type="text/plain" id="md-demo">
+---
+title: 6회차 시연자료 초안
+type: draft
+session: 06
+topic: Windows Git 설치와 기본 기록 남기기
+audience: complete-beginners
+duration: 1h
+share: notion
+---
+
+# 6회차 시연자료
+
+## 시연 목적
+- Git이 설치되지 않은 Windows PC를 기준으로 시작한다.
+- Git 설치, 설치 확인, VS Code 터미널 실행 흐름을 보여 준다.
+- `git-practice.md` 파일로 Git 기본 명령어를 실습한다.
+- `init`, `status`, `add`, `commit`의 의미를 초보자 기준으로 설명한다.
+- 스테이징과 커밋의 차이를 보여 준다.
+
+## 오늘 보여줄 핵심
+```text
+Git 설치
+-> 설치 확인
+-> 실습 파일 만들기
+-> 폴더 기록 시작
+-> 변경 상태 확인
+-> 스테이징
+-> 커밋
+```
+
+## 오늘 제외할 내용
+```text
+오늘은 GitHub, branch, merge, conflict, push, pull을 다루지 않습니다.
+오늘은 내 PC에서 내 파일의 변경 기록을 남기는 것까지만 합니다.
+```
+
+## 1. Git 설치 페이지 보여주기
+```text
+https://git-scm.com/install/windows.html
+```
+
+Windows용 설치 파일을 다운로드하는 위치를 보여 줍니다.
+
+## 2. VS Code 다시 열기
+Git 설치 후에는 VS Code를 완전히 닫았다가 다시 엽니다.
+
+## 3. VS Code 터미널 열기
+```text
+Terminal > New Terminal
+```
+
+## 4. 설치 확인하기
+```text
+git --version
+```
+
+정상 예시입니다.
+
+```text
+git version 2.xx.x
+```
+
+## 5. 실습 폴더 열기
+```text
+File > Open Folder
+```
+
+예시 폴더 이름입니다.
+
+```text
+git-practice
+```
+
+## 6. git-practice.md 만들기
+```md
+# Git 연습
+
+오늘 Git 설치와 기본 명령어를 배웠습니다.
+```
+
+## 7. git init 실행
+```text
+git init
+```
+
+## 8. git status 실행
+```text
+git status
+```
+
+## 9. git add 실행
+```text
+git add git-practice.md
+```
+
+## 10. 스테이징 상태 확인
+```text
+git status
+```
+
+## 11. git commit 실행
+```text
+git commit -m "첫 Git 연습 기록"
+```
+
+## 12. 깨끗한 상태 확인
+```text
+git status
+```
+
+## 마무리
+내 PC에서 내 파일의 변경 기록을 남기는 것부터 시작합니다.
+  </script>
+
+  <script type="text/plain" id="md-guide">
+# Git 명령어 요약 가이드
+
+## 설치 확인
+```text
+git --version
+```
+
+Git이 설치되어 있는지 확인합니다.
+
+## 기록 시작
+```text
+git init
+```
+
+현재 폴더를 Git 기록 대상으로 만듭니다.
+
+## 상태 확인
+```text
+git status
+```
+
+무엇이 바뀌었는지 확인합니다.
+
+## 스테이징
+```text
+git add git-practice.md
+```
+
+이번 기록에 넣을 파일을 고릅니다.
+
+## 커밋
+```text
+git commit -m "첫 Git 연습 기록"
+```
+
+스테이징한 파일을 하나의 기록으로 남깁니다.
+
+## 오늘의 핵심
+```text
+init = 기록 시작
+status = 상태 확인
+add = 기록할 파일 고르기
+commit = 기록으로 남기기
+```
+
+## 오늘 제외
+- GitHub
+- branch
+- merge
+- conflict
+- push
+- pull
+  </script>
+
+  <script>
+    const docs = {
+      explanation: {
+        title: "6회차 설명자료",
+        source: "session-06-notion-final.md",
+        elementId: "md-explanation"
+      },
+      demo: {
+        title: "6회차 시연자료",
+        source: "drafts/session-06-demonstration-draft.md",
+        elementId: "md-demo"
+      },
+      guide: {
+        title: "Git 명령어 요약 가이드",
+        source: "#",
+        elementId: "md-guide"
+      }
+    };
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function renderInline(value) {
+      return escapeHtml(value).replace(/`([^`]+)`/g, "<code>$1</code>");
+    }
+
+    function stripFrontmatter(markdown) {
+      return markdown.replace(/^---[\s\S]*?---\s*/, "");
+    }
+
+    function renderMarkdown(markdown) {
+      const lines = stripFrontmatter(markdown.trim()).split(/\r?\n/);
+      const html = [];
+      let paragraph = [];
+      let listType = null;
+      let inCode = false;
+      let codeLines = [];
+
+      function flushParagraph() {
+        if (paragraph.length) {
+          html.push(`<p>${renderInline(paragraph.join(" "))}</p>`);
+          paragraph = [];
+        }
+      }
+
+      function closeList() {
+        if (listType) {
+          html.push(listType === "ol" ? "</ol>" : "</ul>");
+          listType = null;
+        }
+      }
+
+      for (const line of lines) {
+        if (line.startsWith("```")) {
+          if (inCode) {
+            html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+            inCode = false;
+            codeLines = [];
+          } else {
+            flushParagraph();
+            closeList();
+            inCode = true;
+          }
+          continue;
+        }
+
+        if (inCode) {
+          codeLines.push(line);
+          continue;
+        }
+
+        if (!line.trim()) {
+          flushParagraph();
+          closeList();
+          continue;
+        }
+
+        const heading = line.match(/^(#{1,4})\s+(.*)$/);
+        if (heading) {
+          flushParagraph();
+          closeList();
+          const level = Math.min(heading[1].length, 4);
+          html.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
+          continue;
+        }
+
+        const unordered = line.match(/^- \s+(.*)$/);
+        if (unordered) {
+          flushParagraph();
+          if (listType !== "ul") {
+            closeList();
+            html.push("<ul>");
+            listType = "ul";
+          }
+          html.push(`<li>${renderInline(unordered[1])}</li>`);
+          continue;
+        }
+
+        const ordered = line.match(/^\d+\.\s+(.*)$/);
+        if (ordered) {
+          flushParagraph();
+          if (listType !== "ol") {
+            closeList();
+            html.push("<ol>");
+            listType = "ol";
+          }
+          html.push(`<li>${renderInline(ordered[1])}</li>`);
+          continue;
+        }
+
+        closeList();
+        paragraph.push(line.trim());
+      }
+
+      flushParagraph();
+      closeList();
+      return html.join("\n");
+    }
+
+    function showDoc(key, shouldScroll = true) {
+      const doc = docs[key];
+      const markdown = document.getElementById(doc.elementId).textContent;
+      document.getElementById("viewer-title").textContent = doc.title;
+      document.getElementById("viewer-source").href = doc.source;
+      document.getElementById("viewer-source").style.display = doc.source === "#" ? "none" : "inline";
+      document.getElementById("viewer-content").innerHTML = renderMarkdown(markdown);
+
+      document.querySelectorAll("[data-doc]").forEach((link) => {
+        link.classList.toggle("is-active", link.dataset.doc === key);
+      });
+
+      if (shouldScroll) {
+        document.getElementById("document-viewer").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+
+    document.querySelectorAll("[data-doc]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        showDoc(link.dataset.doc);
+      });
+    });
+
+    showDoc("explanation", false);
+  </script>
+</body>
+</html>
