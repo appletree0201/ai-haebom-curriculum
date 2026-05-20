@@ -281,6 +281,37 @@
       margin: 6px 0;
     }
 
+    .rendered-doc .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 20px;
+    }
+
+    .rendered-doc table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .rendered-doc th,
+    .rendered-doc td {
+      padding: 10px 12px;
+      border: 1px solid #ddd1c3;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .rendered-doc th {
+      background: #f7efe2;
+      color: #123f34;
+      font-weight: 800;
+    }
+
+    .rendered-doc td {
+      background: #fffdf8;
+      color: #394440;
+    }
+
     .rendered-doc code {
       padding: 2px 6px;
       border: 1px solid #ddd1c3;
@@ -951,6 +982,26 @@ Codex에 요청했는데 날짜 형식의 `md` 파일이 보이지 않습니다.
       return markdown.replace(/^---[\s\S]*?---\s*/, "");
     }
 
+    function isTableRow(line) {
+      return /^\s*\|.*\|\s*$/.test(line);
+    }
+
+    function parseTableRow(line) {
+      return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((cell) => cell.trim());
+    }
+
+    function isTableDivider(line) {
+      return isTableRow(line) && parseTableRow(line).every((cell) => /^:?-{3,}:?$/.test(cell.replace(/\s/g, "")));
+    }
+
+    function renderTable(headers, rows) {
+      const headerHtml = headers.map((cell) => `<th>${renderInline(cell)}</th>`).join("");
+      const bodyHtml = rows
+        .map((row) => `<tr>${row.map((cell) => `<td>${renderInline(cell)}</td>`).join("")}</tr>`)
+        .join("");
+      return `<div class="table-wrap"><table><thead><tr>${headerHtml}</tr></thead><tbody>${bodyHtml}</tbody></table></div>`;
+    }
+
     function renderMarkdown(markdown) {
       const lines = stripFrontmatter(markdown.trim()).split(/\r?\n/);
       const html = [];
@@ -973,7 +1024,8 @@ Codex에 요청했는데 날짜 형식의 `md` 파일이 보이지 않습니다.
         }
       }
 
-      for (const line of lines) {
+      for (let index = 0; index < lines.length; index += 1) {
+        const line = lines[index];
         if (line.startsWith("```")) {
           if (inCode) {
             html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
@@ -995,6 +1047,21 @@ Codex에 요청했는데 날짜 형식의 `md` 파일이 보이지 않습니다.
         if (!line.trim()) {
           flushParagraph();
           closeList();
+          continue;
+        }
+
+        if (isTableRow(line) && isTableDivider(lines[index + 1] || "")) {
+          flushParagraph();
+          closeList();
+          const headers = parseTableRow(line);
+          const rows = [];
+          index += 2;
+          while (index < lines.length && isTableRow(lines[index])) {
+            rows.push(parseTableRow(lines[index]));
+            index += 1;
+          }
+          index -= 1;
+          html.push(renderTable(headers, rows));
           continue;
         }
 
