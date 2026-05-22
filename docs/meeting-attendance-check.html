@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 해봄 모임 참석 확인</title>
+  <style>
+    :root {
+      --paper: #f6f1e8;
+      --panel: #fffdf8;
+      --ink: #1e2622;
+      --muted: #66726d;
+      --line: #d9cdbb;
+      --green: #0f5b46;
+      --green-2: #dcebe2;
+      --blue: #234d68;
+      --blue-2: #e2edf3;
+      --amber: #c8741c;
+      --amber-2: #f7e7d2;
+      --red: #9c3f34;
+      --shadow: 0 18px 42px rgba(42, 36, 26, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 46px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.8fr);
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 34px;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      background: #173f35;
+      color: #f8f2e8;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: 42px;
+      line-height: 1.18;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin-bottom: 0;
+      color: #394440;
+      font-size: 18px;
+    }
+
+    .hero-side h2 {
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .hero-side p {
+      margin: 0;
+      color: #dce8e0;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status-chip {
+      min-height: 72px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .status-chip strong {
+      display: block;
+      color: #f4c77d;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .status-chip span {
+      color: #dce8e0;
+      font-size: 13px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(380px, 1.05fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .section {
+      padding: 26px;
+    }
+
+    .section h2 {
+      margin-bottom: 6px;
+      font-size: 24px;
+    }
+
+    .section-desc {
+      margin-bottom: 20px;
+      color: var(--muted);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label,
+    .field-title {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      min-height: 46px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      background: #fffefa;
+      color: var(--ink);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .segmented,
+    .drink-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .segmented {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .drink-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .choice {
+      position: relative;
+      display: block;
+    }
+
+    .choice input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: #fffefa;
+      color: #394440;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .choice input:checked + span {
+      border-color: var(--green);
+      background: var(--green-2);
+      color: var(--green);
+    }
+
+    .choice input:focus-visible + span,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 3px solid rgba(35, 77, 104, 0.28);
+      outline-offset: 2px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--green);
+      background: var(--green);
+      color: #fffdf8;
+      font-weight: 900;
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: #fffefa;
+      color: var(--green);
+    }
+
+    .btn.danger {
+      border-color: #d7b5ae;
+      background: #fff8f5;
+      color: var(--red);
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--blue);
+      background: var(--blue-2);
+      color: #2d4657;
+      font-size: 14px;
+    }
+
+    .dashboard {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 98px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: #fffefa;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: #fffefa;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #f7efe2;
+    }
+
+    .panel-head h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .panel-body {
+      padding: 16px;
+    }
+
+    .summary-list,
+    .response-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .summary-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee4d7;
+    }
+
+    .summary-list li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .count {
+      min-width: 40px;
+      padding: 2px 8px;
+      background: var(--amber-2);
+      color: #7a3f00;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .response-item {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border-left: 4px solid var(--green);
+      background: #faf4eb;
+    }
+
+    .response-item strong {
+      font-size: 16px;
+    }
+
+    .response-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .empty {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .markdown-preview {
+      min-height: 220px;
+      max-height: 360px;
+      overflow: auto;
+      white-space: pre-wrap;
+      margin: 0;
+      padding: 16px;
+      border: 1px solid #d5cabc;
+      background: #17211f;
+      color: #f8f2e8;
+      font-family: "D2Coding", Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 20;
+      max-width: min(360px, calc(100% - 48px));
+      padding: 14px 16px;
+      border: 1px solid #b9d6c8;
+      background: #f2fff8;
+      color: var(--green);
+      box-shadow: var(--shadow);
+      font-weight: 800;
+      transform: translateY(24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .toast.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 920px) {
+      .page {
+        width: min(100% - 24px, 1180px);
+        padding: 24px 0 36px;
+      }
+
+      .hero,
+      .layout,
+      .status-row,
+      .metric-grid,
+      .drink-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .section {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .segmented {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-main">
+        <p class="eyebrow">AI 해봄 동호회 · 모임 운영도구</p>
+        <h1 id="page-title">모임 참석 확인</h1>
+        <p class="lead">참석 여부, 음료 선택, 요청사항을 한 화면에서 받고 운영진용 Markdown 기록으로 정리합니다.</p>
+      </div>
+
+      <aside class="hero-side" aria-label="현재 저장 상태">
+        <div>
+          <h2>현재 브라우저 저장</h2>
+          <p>서버 저장 없이 이 화면에서 응답 흐름과 Markdown 기록을 확인합니다.</p>
+        </div>
+        <div class="status-row" aria-label="요약 지표">
+          <div class="status-chip"><strong id="hero-total">0</strong><span>전체 응답</span></div>
+          <div class="status-chip"><strong id="hero-attend">0</strong><span>참석</span></div>
+          <div class="status-chip"><strong id="hero-drinks">0</strong><span>음료 수</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <section class="section" aria-labelledby="form-title">
+        <h2 id="form-title">회원 응답</h2>
+        <p class="section-desc">필수 항목만 짧게 받고, 요청사항은 자유롭게 적습니다.</p>
+
+        <form id="attendance-form">
+          <div class="field">
+            <label for="meeting-title">모임명</label>
+            <input id="meeting-title" name="meetingTitle" type="text" value="AI 해봄 정기모임" required>
+          </div>
+
+          <div class="field">
+            <label for="meeting-date">모임일</label>
+            <input id="meeting-date" name="meetingDate" type="date" required>
+          </div>
+
+          <div class="field">
+            <label for="member-name">이름</label>
+            <input id="member-name" name="memberName" type="text" autocomplete="name" placeholder="예: 홍길동" required>
+          </div>
+
+          <div class="field">
+            <label for="member-team">부서 또는 소속</label>
+            <input id="member-team" name="memberTeam" type="text" placeholder="예: 운영지원팀">
+          </div>
+
+          <div class="field">
+            <span class="field-title">참석 여부</span>
+            <div class="segmented" role="radiogroup" aria-label="참석 여부">
+              <label class="choice"><input type="radio" name="attendance" value="참석" checked><span>참석</span></label>
+              <label class="choice"><input type="radio" name="attendance" value="불참"><span>불참</span></label>
+              <label class="choice"><input type="radio" name="attendance" value="미정"><span>미정</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-title">음료 선택</span>
+            <div class="drink-grid" role="radiogroup" aria-label="음료 선택">
+              <label class="choice"><input type="radio" name="drink" value="아이스 아메리카노" checked><span>아이스 아메리카노</span></label>
+              <label class="choice"><input type="radio" name="drink" value="따뜻한 아메리카노"><span>따뜻한 아메리카노</span></label>
+              <label class="choice"><input type="radio" name="drink" value="아이스 라떼"><span>아이스 라떼</span></label>
+              <label class="choice"><input type="radio" name="drink" value="따뜻한 라떼"><span>따뜻한 라떼</span></label>
+              <label class="choice"><input type="radio" name="drink" value="차"><span>차</span></label>
+              <label class="choice"><input type="radio" name="drink" value="음료 안 마심"><span>음료 안 마심</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="custom-drink">기타 음료</label>
+            <input id="custom-drink" name="customDrink" type="text" placeholder="선택지에 없을 때만 입력">
+          </div>
+
+          <div class="field">
+            <label for="request">요청사항</label>
+            <textarea id="request" name="request" placeholder="궁금한 점, 준비물, 음료 요청, 진행 방식 의견 등을 적습니다."></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">응답 저장</button>
+            <button class="btn secondary" type="button" id="fill-sample">예시 추가</button>
+            <button class="btn secondary" type="reset">입력 지우기</button>
+          </div>
+        </form>
+
+        <p class="notice">현재 버전은 서버에 저장하지 않습니다. 같은 브라우저에서 저장한 응답만 대시보드에 표시됩니다.</p>
+      </section>
+
+      <section class="section dashboard" aria-labelledby="dashboard-title">
+        <div>
+          <h2 id="dashboard-title">운영진 대시보드</h2>
+          <p class="section-desc">응답 수, 음료 수량, 요청사항을 Markdown 기록으로 정리합니다.</p>
+        </div>
+
+        <div class="metric-grid" aria-label="참석 요약">
+          <div class="metric"><strong id="metric-attend">0</strong><span>참석</span></div>
+          <div class="metric"><strong id="metric-absent">0</strong><span>불참</span></div>
+          <div class="metric"><strong id="metric-unknown">0</strong><span>미정</span></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>음료 수량</h3>
+            <span id="drink-total">0잔</span>
+          </div>
+          <div class="panel-body">
+            <ul class="summary-list" id="drink-list"></ul>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>요청사항</h3>
+            <span id="request-count">0건</span>
+          </div>
+          <div class="panel-body">
+            <ul class="response-list" id="request-list"></ul>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>응답자 목록</h3>
+            <span id="response-count">0명</span>
+          </div>
+          <div class="panel-body">
+            <ul class="response-list" id="response-list"></ul>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Markdown 기록</h3>
+            <span id="markdown-date"></span>
+          </div>
+          <div class="panel-body">
+            <pre class="markdown-preview" id="markdown-preview"></pre>
+            <div class="actions">
+              <button class="btn" type="button" id="download-md">Markdown 다운로드</button>
+              <button class="btn secondary" type="button" id="copy-md">Markdown 복사</button>
+              <button class="btn danger" type="button" id="clear-data">응답 초기화</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const STORAGE_KEY = "ai-haebom-attendance-responses-v1";
+    const today = new Date().toISOString().slice(0, 10);
+    const form = document.getElementById("attendance-form");
+    const meetingDate = document.getElementById("meeting-date");
+    const meetingTitle = document.getElementById("meeting-title");
+    const toast = document.getElementById("toast");
+
+    meetingDate.value = today;
+
+    function loadResponses() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveResponses(responses) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("is-visible");
+      window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
+    }
+
+    function getFormData() {
+      const data = new FormData(form);
+      const selectedDrink = data.get("drink");
+      const customDrink = data.get("customDrink").trim();
+      return {
+        id: window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : String(Date.now()),
+        submittedAt: new Date().toISOString(),
+        meetingTitle: data.get("meetingTitle").trim(),
+        meetingDate: data.get("meetingDate"),
+        memberName: data.get("memberName").trim(),
+        memberTeam: data.get("memberTeam").trim(),
+        attendance: data.get("attendance"),
+        drink: customDrink || selectedDrink,
+        request: data.get("request").trim()
+      };
+    }
+
+    function countBy(items, key) {
+      return items.reduce((acc, item) => {
+        const value = item[key] || "미입력";
+        acc[value] = (acc[value] || 0) + 1;
+        return acc;
+      }, {});
+    }
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function renderList(id, items, emptyText, renderItem) {
+      const list = document.getElementById(id);
+      list.replaceChildren();
+      if (!items.length) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = emptyText;
+        list.replaceWith(empty);
+        empty.id = id;
+        return;
+      }
+
+      if (list.tagName !== "UL") {
+        const newList = document.createElement("ul");
+        newList.className = id === "drink-list" ? "summary-list" : "response-list";
+        newList.id = id;
+        document.getElementById(id).replaceWith(newList);
+      }
+
+      const targetList = document.getElementById(id);
+      items.forEach((item) => targetList.appendChild(renderItem(item)));
+    }
+
+    function createSummaryItem(label, value) {
+      const li = document.createElement("li");
+      const name = document.createElement("span");
+      const count = document.createElement("span");
+      name.textContent = label;
+      count.className = "count";
+      count.textContent = value;
+      li.append(name, count);
+      return li;
+    }
+
+    function createResponseItem(response) {
+      const li = document.createElement("li");
+      li.className = "response-item";
+      const title = document.createElement("strong");
+      const meta = document.createElement("span");
+      title.textContent = `${response.memberName}${response.memberTeam ? " · " + response.memberTeam : ""}`;
+      meta.textContent = `${response.attendance} · ${response.drink}`;
+      li.append(title, meta);
+      return li;
+    }
+
+    function createRequestItem(response) {
+      const li = document.createElement("li");
+      li.className = "response-item";
+      const title = document.createElement("strong");
+      const detail = document.createElement("span");
+      title.textContent = response.memberName;
+      detail.textContent = response.request;
+      li.append(title, detail);
+      return li;
+    }
+
+    function makeMarkdown(responses) {
+      const title = meetingTitle.value.trim() || "AI 해봄 정기모임";
+      const date = meetingDate.value || today;
+      const attendanceCounts = countBy(responses, "attendance");
+      const drinkCounts = countBy(responses.filter((item) => item.attendance === "참석"), "drink");
+      const requests = responses.filter((item) => item.request);
+      const lines = [];
+
+      lines.push("---");
+      lines.push(`title: ${title} 참석 확인`);
+      lines.push(`date: ${date}`);
+      lines.push("type: meeting-attendance");
+      lines.push("---");
+      lines.push("");
+      lines.push(`# ${title} 참석 확인`);
+      lines.push("");
+      lines.push("## 참석 요약");
+      lines.push(`- 참석: ${attendanceCounts["참석"] || 0}명`);
+      lines.push(`- 불참: ${attendanceCounts["불참"] || 0}명`);
+      lines.push(`- 미정: ${attendanceCounts["미정"] || 0}명`);
+      lines.push("");
+      lines.push("## 음료 수량");
+      if (Object.keys(drinkCounts).length) {
+        Object.entries(drinkCounts).forEach(([drink, count]) => lines.push(`- ${drink}: ${count}`));
+      } else {
+        lines.push("- 아직 참석 응답이 없습니다.");
+      }
+      lines.push("");
+      lines.push("## 요청사항");
+      if (requests.length) {
+        requests.forEach((item) => lines.push(`- ${item.memberName}: ${item.request}`));
+      } else {
+        lines.push("- 요청사항 없음");
+      }
+      lines.push("");
+      lines.push("## 응답자 목록");
+      if (responses.length) {
+        responses.forEach((item) => {
+          const team = item.memberTeam ? ` / ${item.memberTeam}` : "";
+          lines.push(`- ${item.memberName}${team}: ${item.attendance}, ${item.drink}`);
+        });
+      } else {
+        lines.push("- 응답 없음");
+      }
+      lines.push("");
+      return lines.join("\n");
+    }
+
+    function renderDashboard() {
+      const responses = loadResponses();
+      const attendanceCounts = countBy(responses, "attendance");
+      const attending = responses.filter((item) => item.attendance === "참석");
+      const drinkCounts = countBy(attending, "drink");
+      const drinkRows = Object.entries(drinkCounts).sort((a, b) => b[1] - a[1]);
+      const requests = responses.filter((item) => item.request);
+      const markdown = makeMarkdown(responses);
+
+      setText("hero-total", responses.length);
+      setText("hero-attend", attendanceCounts["참석"] || 0);
+      setText("hero-drinks", attending.length);
+      setText("metric-attend", attendanceCounts["참석"] || 0);
+      setText("metric-absent", attendanceCounts["불참"] || 0);
+      setText("metric-unknown", attendanceCounts["미정"] || 0);
+      setText("drink-total", `${attending.length}잔`);
+      setText("request-count", `${requests.length}건`);
+      setText("response-count", `${responses.length}명`);
+      setText("markdown-date", meetingDate.value || today);
+      document.getElementById("markdown-preview").textContent = markdown;
+
+      renderList("drink-list", drinkRows, "아직 음료 수량이 없습니다.", ([drink, count]) => createSummaryItem(drink, count));
+      renderList("request-list", requests, "아직 요청사항이 없습니다.", createRequestItem);
+      renderList("response-list", responses, "아직 응답이 없습니다.", createResponseItem);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const response = getFormData();
+      if (!response.memberName) {
+        showToast("이름을 입력해 주세요.");
+        return;
+      }
+
+      const responses = loadResponses();
+      const existingIndex = responses.findIndex((item) => item.memberName === response.memberName && item.meetingDate === response.meetingDate);
+      if (existingIndex >= 0) {
+        responses[existingIndex] = response;
+        showToast("기존 응답을 최신 내용으로 바꿨습니다.");
+      } else {
+        responses.push(response);
+        showToast("응답을 저장했습니다.");
+      }
+      saveResponses(responses);
+      form.reset();
+      meetingTitle.value = response.meetingTitle;
+      meetingDate.value = response.meetingDate;
+      form.querySelector('input[name="attendance"][value="참석"]').checked = true;
+      form.querySelector('input[name="drink"][value="아이스 아메리카노"]').checked = true;
+      renderDashboard();
+    });
+
+    document.getElementById("fill-sample").addEventListener("click", () => {
+      const samples = [
+        ["김해봄", "기획팀", "참석", "아이스 아메리카노", "처음 참여해서 설치 부분을 천천히 보고 싶습니다."],
+        ["박자동", "운영지원팀", "참석", "아이스 라떼", "자료 링크를 모임 전에 다시 공유해 주세요."],
+        ["이정리", "교육팀", "미정", "음료 안 마심", ""]
+      ];
+      const responses = loadResponses();
+      samples.forEach(([memberName, memberTeam, attendance, drink, request]) => {
+        responses.push({
+          id: window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : String(Date.now() + Math.random()),
+          submittedAt: new Date().toISOString(),
+          meetingTitle: meetingTitle.value.trim() || "AI 해봄 정기모임",
+          meetingDate: meetingDate.value || today,
+          memberName,
+          memberTeam,
+          attendance,
+          drink,
+          request
+        });
+      });
+      saveResponses(responses);
+      renderDashboard();
+      showToast("예시 응답 3건을 추가했습니다.");
+    });
+
+    document.getElementById("download-md").addEventListener("click", () => {
+      const markdown = document.getElementById("markdown-preview").textContent;
+      const date = meetingDate.value || today;
+      const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `ai-haebom-attendance-${date}.md`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+      showToast("Markdown 파일을 만들었습니다.");
+    });
+
+    document.getElementById("copy-md").addEventListener("click", async () => {
+      const markdown = document.getElementById("markdown-preview").textContent;
+      try {
+        await navigator.clipboard.writeText(markdown);
+        showToast("Markdown을 복사했습니다.");
+      } catch {
+        showToast("브라우저에서 복사를 허용하지 않았습니다.");
+      }
+    });
+
+    document.getElementById("clear-data").addEventListener("click", () => {
+      const ok = window.confirm("현재 브라우저에 저장된 응답을 모두 지울까요?");
+      if (!ok) return;
+      saveResponses([]);
+      renderDashboard();
+      showToast("응답을 초기화했습니다.");
+    });
+
+    meetingTitle.addEventListener("input", renderDashboard);
+    meetingDate.addEventListener("input", renderDashboard);
+    renderDashboard();
+  </script>
+</body>
+</html>
