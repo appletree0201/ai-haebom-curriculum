@@ -35,11 +35,11 @@ title: AI 해봄 컬리큘럼
 
 처음 참여하는 사람은 전체 페이지를 열고 1회차부터 차례대로 보는 것을 권장합니다.
 
-[모임 참석 확인 운영도구 열기](https://appletree0201.github.io/ai-haebom-curriculum/meeting-attendance-check.html)
+[모임 참석 확인 운영도구 열기](https://appletree0201.github.io/ai-haebom-curriculum/operations/attendance-check/)
 
 모임 전에 참석 여부, 음료 선택, 요청사항을 가볍게 정리할 때 사용합니다.
 
-[모임 참석 확인 구현 및 테스트 계획](https://appletree0201.github.io/ai-haebom-curriculum/meeting-attendance-service-plan.md)
+[모임 참석 확인 구현 및 테스트 계획](https://appletree0201.github.io/ai-haebom-curriculum/operations/attendance-check/implementation-plan.md)
 
 회원 응답을 서버에 저장하고 운영진 대시보드에서 취합하는 다음 단계를 검토할 때 사용합니다.
 
