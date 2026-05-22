@@ -24,30 +24,34 @@ AI 해봄 모임 전에 회원이 공개 HTML 페이지에서 참석 여부, 음
 
 ```text
 회원
--> GitHub Pages HTML
--> Cloudflare Worker API
--> Cloudflare Workers KV
+-> Vercel HTML
+-> Vercel Functions API
+-> Vercel Blob
 -> 운영진 대시보드
 -> Markdown 다운로드
 -> Obsidian 또는 wiki 기록
 ```
 
-GitHub Pages는 정적 HTML을 제공한다.
-실제 응답 저장 서버는 Cloudflare Worker가 맡는다.
+Vercel이 HTML 화면과 API를 함께 제공한다.
+실제 응답 저장은 Vercel Blob이 맡는다.
+
+GitHub Pages에는 안내용 문서와 기존 화면 시안을 유지한다.
+실제 취합형 테스트는 Vercel 배포 URL에서 진행한다.
 
 공식 문서 기준으로 GitHub Pages는 HTML, CSS, JavaScript 같은 정적 파일을 게시하는 서비스다.
 따라서 자체 데이터 저장 서버로 쓰지 않는다.
 
-Cloudflare Worker는 HTTP 요청을 받는 `fetch` 핸들러로 API를 만들 수 있다.
-Workers KV는 Worker에서 읽고 쓰는 키-값 저장소로 쓴다.
+Vercel은 `/api` 폴더의 파일을 Node.js 런타임 Functions로 배포할 수 있다.
+Vercel Blob은 런타임에 JSON 파일 같은 데이터를 저장할 수 있는 object storage다.
 
 ## 왜 이 방식인가
-- GitHub Pages는 계속 사용할 수 있다.
+- Vercel 한 곳에서 화면과 API를 함께 테스트할 수 있다.
 - 별도 서버 PC를 켜 둘 필요가 없다.
 - Google Sheet를 쓰지 않는다.
 - 회원은 GitHub 계정 없이 제출할 수 있다.
 - 운영진은 HTML 대시보드에서 바로 집계와 Markdown 내보내기를 확인한다.
-- 나중에 D1, Notion, 사내 서버로 바꾸기 쉽다.
+- 나중에 GitHub Pages HTML에서 Vercel API만 호출하도록 분리할 수 있다.
+- 나중에 Supabase, Notion, 사내 서버로 저장소를 바꾸기 쉽다.
 
 ## 1차 범위
 
@@ -161,25 +165,21 @@ X-Admin-Pin: 운영진_PIN
 응답은 `text/markdown` 형식으로 받는다.
 
 ## 저장 방식
-Workers KV에는 응답 1건을 키 1개로 저장한다.
+Vercel Blob에는 응답 1건을 JSON 파일 1개로 저장한다.
 
 키 예시:
 
 ```text
-meeting:2026-06-01-regular:response:01J...
+attendance/2026-06-01-regular/member-name.json
 ```
 
 같은 회원이 다시 제출하면 최신 응답으로 덮어쓴다.
-이를 위해 별도 인덱스 키를 둔다.
-
-```text
-meeting:2026-06-01-regular:member:홍길동
-```
+이를 위해 `meetingId + memberName` 기준으로 같은 경로에 다시 저장한다.
 
 주의할 점:
-- KV는 읽기가 빠르고 단순하다.
-- 같은 키에 너무 자주 쓰는 구조는 피한다.
-- 응답이 많아지고 조회 조건이 복잡해지면 D1로 옮긴다.
+- Blob은 단순 JSON 파일 저장에 적합하다.
+- 응답이 많아지고 검색 조건이 복잡해지면 별도 DB로 옮긴다.
+- Vercel Functions 파일 시스템은 영구 저장소가 아니므로 배포 환경에서는 Blob을 사용한다.
 
 ## 화면 구성
 
@@ -213,23 +213,24 @@ meeting:2026-06-01-regular:member:홍길동
 완료 기준:
 - API 요청과 응답 예시가 문서에 정리되어 있다.
 
-### 2단계: Cloudflare Worker 초안 작성
+### 2단계: Vercel Functions 초안 작성
 - `POST /responses`를 만든다.
 - `GET /summary`를 만든다.
 - `GET /markdown`을 만든다.
-- CORS를 GitHub Pages 도메인 기준으로 허용한다.
+- 로컬에서는 `.data/attendance/` 파일 저장으로 먼저 테스트한다.
 
 완료 기준:
 - `curl` 또는 브라우저에서 응답 저장과 조회가 된다.
 
-### 3단계: KV 연결
-- KV namespace를 만든다.
-- Worker에 KV binding을 연결한다.
-- 응답 1건을 KV에 저장한다.
+### 3단계: Vercel Blob 연결
+- Vercel 프로젝트를 만든다.
+- Blob store를 만든다.
+- `BLOB_READ_WRITE_TOKEN` 환경변수를 연결한다.
+- 응답 1건을 Blob에 JSON으로 저장한다.
 - meetingId 기준으로 응답 목록을 읽는다.
 
 완료 기준:
-- Worker를 재시작해도 응답이 남아 있다.
+- Vercel 재배포 후에도 응답이 남아 있다.
 
 ### 4단계: HTML 연결
 - 기존 `operations/attendance-check/index.html`의 `localStorage` 저장을 API 저장으로 바꾼다.
@@ -238,7 +239,7 @@ meeting:2026-06-01-regular:member:홍길동
 - Markdown 다운로드는 `/markdown` 결과를 사용한다.
 
 완료 기준:
-- GitHub Pages에서 제출한 응답이 Worker에 저장된다.
+- Vercel 페이지에서 제출한 응답이 Blob에 저장된다.
 - 다른 브라우저에서 대시보드를 열어도 같은 집계가 보인다.
 
 ### 5단계: 공개 테스트
@@ -275,7 +276,7 @@ meeting:2026-06-01-regular:member:홍길동
 
 ## 위험과 대응
 
-### 회사 정책상 Cloudflare 사용이 어려울 수 있음
+### 회사 정책상 Vercel 사용이 어려울 수 있음
 대응:
 - 먼저 테스트용으로만 사용한다.
 - 실제 운영 전 저장 위치 승인을 확인한다.
@@ -288,14 +289,14 @@ meeting:2026-06-01-regular:member:홍길동
 
 ### 관리자 PIN이 노출될 수 있음
 대응:
-- PIN은 Worker 환경변수에 둔다.
+- PIN은 Vercel 환경변수에 둔다.
 - HTML 파일에는 넣지 않는다.
 - PIN이 노출되면 즉시 바꾼다.
 
-### 장기 운영에는 KV가 불편할 수 있음
+### 장기 운영에는 Blob이 불편할 수 있음
 대응:
-- 1차는 KV로 단순하게 만든다.
-- 응답이 많아지면 D1로 옮긴다.
+- 1차는 Blob JSON 파일로 단순하게 만든다.
+- 응답이 많아지면 DB로 옮긴다.
 
 ## 파일 변경 예상
 
@@ -308,6 +309,7 @@ Output/final/operations/attendance-check/index.html
 Output/final/operations/attendance-check/implementation-plan.md
 Output/final/share-index.html
 Output/final/share-guide-notion-final.md
+tools/attendance-check/
 wiki/index.md
 wiki/log.md
 ```
@@ -324,8 +326,8 @@ docs/share-index.html
 docs/share-guide-notion-final.md
 ```
 
-새 API 코드를 저장할 위치는 구현 시 정한다.
-후보는 `tools/attendance-worker/` 또는 별도 저장소다.
+API 코드는 private 저장소의 `tools/attendance-check/`에 둔다.
+공개 저장소에는 배포용 문서와 GitHub Pages 화면만 둔다.
 
 ## 첫 테스트 시나리오
 
@@ -341,14 +343,14 @@ docs/share-guide-notion-final.md
 ## 다음 결정
 구현 전에 아래 3가지를 정한다.
 
-1. Cloudflare Workers를 테스트용으로 써도 되는가?
+1. Vercel과 Vercel Blob을 테스트용으로 써도 되는가?
 2. 관리자 PIN 방식으로 1차 대시보드를 보호해도 되는가?
-3. 새 API 코드를 현재 private 저장소에 둘지, public 저장소에 둘지 정한다.
+3. Vercel 프로젝트를 개인 계정으로 만들지, 조직 계정으로 만들지 정한다.
 
 추천은 private 저장소에 API 코드를 두고, 공개 저장소에는 HTML만 두는 방식이다.
 
 ## 참고 공식 문서
 - GitHub Pages는 정적 파일을 게시하는 서비스다: https://docs.github.com/articles/user-organization-and-project-pages
-- Cloudflare Worker는 HTTP 요청을 받는 `fetch` 핸들러로 동작한다: https://developers.cloudflare.com/workers/runtime-apis/fetch/
-- Workers KV는 Worker에서 키-값 데이터를 읽고 쓸 수 있다: https://developers.cloudflare.com/kv/
-- KV 쓰기는 `put()`으로 처리한다: https://developers.cloudflare.com/kv/api/write-key-value-pairs/
+- Vercel Functions는 `/api` 폴더의 파일을 함수로 배포한다: https://vercel.com/docs/functions/runtimes/node-js
+- Vercel Blob은 런타임 파일 저장소로 사용할 수 있다: https://vercel.com/docs/vercel-blob
+- Vercel Blob SDK는 `put()`, `list()`, `get()` 같은 서버 측 작업을 제공한다: https://vercel.com/docs/storage/vercel-blob/using-blob-sdk
